@@ -14,12 +14,15 @@ document.addEventListener("keydown", function () {
 
 let level = 0;
 function levelUp() {
-  level++;
+    level++;
 
-  h2.innerText = `Level ${level}`;
+    h2.innerText = `Level ${level}`;
 
-  machineflash();
+    machineflash();      // add new color
+
+    replaysequence();    // show entire sequence
 }
+
 
 function machineflash() {
   //machineflash
@@ -27,13 +30,20 @@ function machineflash() {
   let colorval = randombtns[randomcolridx];
   gameseq.push(colorval);// storing the color value that machine choosed randomly 
   console.log(gameseq);
-  let btn = document.querySelector(`.${colorval}`);
 
-  btn.classList.add("machineflash");
+}
 
-  setTimeout(function () {
-    btn.classList.remove("machineflash");
-  }, 250);
+
+
+function replaysequence(){
+gameseq.forEach(function(element,index){
+    setTimeout(function(){
+        document.getElementById(element).classList.add("machineflash");
+        setTimeout(function(){
+             document.getElementById(element).classList.remove('machineflash');
+        },250);
+    },index*500);
+});
 }
 
 function userflash(btn) {
