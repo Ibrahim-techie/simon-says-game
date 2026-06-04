@@ -1,56 +1,95 @@
-let h2= document.querySelector('h2');
+let h2 = document.querySelector("h2");
 
-
-let randombtns=["red","yellow","green","purple"];
-let startgame=false;
-document.addEventListener('keydown',function(){
-    if(!startgame){
-    h2.innerText="Level1";
-    startgame=true;
+let userSeq = []; //stores user clicked buttons
+let gameseq = []; //stores machine flash buttons
+let randombtns = ["red", "yellow", "green", "purple"];
+let startgame = false;
+document.addEventListener("keydown", function () {
+  if (!startgame) {
+    h2.innerText = "Level1";
+    startgame = true;
     levelUp();
-    }
-
-    
+  }
 });
 
-let level=0;
-function levelUp(){
-level++;
+let level = 0;
+function levelUp() {
+  level++;
 
+  h2.innerText = `Level ${level}`;
 
-machineflash();
+  machineflash();
 }
 
-function machineflash(){//machineflash
-    let randomcolridx = Math.floor(Math.random() * randombtns.length);
-   let colorval = randombtns[randomcolridx];
- 
-    let btn=document.querySelector(`.${colorval}`);
+function machineflash() {
+  //machineflash
+  let randomcolridx = Math.floor(Math.random() * randombtns.length);
+  let colorval = randombtns[randomcolridx];
+  gameseq.push(colorval);// storing the color value that machine choosed randomly 
+  
+  let btn = document.querySelector(`.${colorval}`);
+
+  btn.classList.add("machineflash");
+
+  setTimeout(function () {
+    btn.classList.remove("machineflash");
+  }, 250);
+}
+
+function userflash(btn) {
+  btn.classList.add("userflash");
+
+  setTimeout(function () {
+    btn.classList.remove("userflash");
+  }, 250);
+}
+
+function getclickbtn(btn){
+let userclick = btn.getAttribute('id');
+userSeq.push(userclick);
+
+check();
+
+}
+let clickbtn = document.querySelectorAll(".btn");
+
+for (let btn of clickbtn) {
+  btn.addEventListener("click", function () {
+    if(!startgame){
+        return;
+    }
+    getclickbtn(this);
+    userflash(this);
+  });
+}
+
+
+function check(){
+    let idx = userSeq.length - 1;
+  
+if(gameseq[idx]===userSeq[idx]){
+if(userSeq.length===gameseq.length){
+    userSeq=[];
+    setTimeout(() => {
+        levelUp();
+    }, 1000);
+
+}
+}else{
+    h2.innerText="Game Over press any to restart";
+    restart();
+}
+     
+
    
-    btn.classList.add('machineflash');
-
-setTimeout(function() {
-    btn.classList.remove('machineflash');
-}, 250);
-}
-
-
-function userflash(btn){
-
-   
-    btn.classList.add('userflash');
-
-setTimeout(function() {
-    btn.classList.remove('userflash');
-}, 250);
 }
 
 
 
-let clickbtn=document.querySelectorAll('.btn');
+function restart(){
+    level=0;
+    startgame=false;
+    userSeq=[];
+    gameseq=[];
 
-for(let btn of clickbtn){
-    btn.addEventListener('click', function(){
-        userflash(this);
-    });
 }
