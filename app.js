@@ -45,7 +45,7 @@ function userflash(btn) {
 }
 
 function getclickbtn(btn){
-let userclick = btn.getAttribute('id');
+let userclick = btn.id;
 userSeq.push(userclick);
 
 check();
