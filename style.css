@@ -1,0 +1,42 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.btn-container {
+    width: 420px;
+    margin: 2rem auto;
+
+    display: grid;
+grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.btn {
+    height: 180px;
+    width: 180px;
+    border-radius: 20px;
+    border: 5px solid black;
+    cursor: pointer;
+}
+
+.red {
+    background-color: #d95980;
+}
+
+.yellow {
+    background-color: #f99b45;
+}
+
+.green {
+    background-color: #63aac0;
+}
+
+.blue {
+    background-color: #819ff9;
+}
+
+.flash{
+
+    background-color: white;
+}
