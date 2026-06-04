@@ -2,7 +2,7 @@ let h2 = document.querySelector("h2");
 
 let userSeq = []; //stores user clicked buttons
 let gameseq = []; //stores machine flash buttons
-let randombtns = ["red", "yellow", "green", "purple"];
+let randombtns = ["red", "yellow", "green", "blue"];
 let startgame = false;
 document.addEventListener("keydown", function () {
   if (!startgame) {
@@ -26,7 +26,7 @@ function machineflash() {
   let randomcolridx = Math.floor(Math.random() * randombtns.length);
   let colorval = randombtns[randomcolridx];
   gameseq.push(colorval);// storing the color value that machine choosed randomly 
-  
+  console.log(gameseq);
   let btn = document.querySelector(`.${colorval}`);
 
   btn.classList.add("machineflash");
@@ -47,7 +47,7 @@ function userflash(btn) {
 function getclickbtn(btn){
 let userclick = btn.id;
 userSeq.push(userclick);
-
+console.log(userSeq);
 check();
 
 }
@@ -91,5 +91,6 @@ function restart(){
     startgame=false;
     userSeq=[];
     gameseq=[];
+
 
 }
