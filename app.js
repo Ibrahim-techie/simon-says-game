@@ -90,7 +90,6 @@ function check() {
     setTimeout(() => {
       document.body.classList.remove("game-over");
     }, 200);
-    
 h2.innerHTML =
         `Game Over!<br>
          Score: ${level}<br>
